@@ -14,7 +14,7 @@
 <form action = "index.php" method = "post">
     <div class="form-group">
         <label for="formGroupExampleInput">lengte in cm.</label>
-        <input type="number" class="form-control" id="formGroupExampleInput" name = "lengte" value = "<?php if (isset($_POST['lengte'])) echo $_POST['lengte']; ?>" min = 50 max = 244>
+        <input type="number" class="form-control" id="formGroupExampleInput" name = "lengte" value = "<?php if (isset($_POST['lengte'])) echo $_POST['lengte'];?>" min = 50 max = 244>
     </div>
     <div class="form-group">
         <label for="formGroupExampleInput">breedte in cm.</label>
@@ -37,11 +37,11 @@
 <input name = "kleur" type = "radio" value = "5" <?php if(isset($_POST['kleur']) && ($_POST['kleur'] == '5')) echo 'checked="checked" ';?>>geel
 <input name = "kleur" type = "radio" value = "6" <?php if(isset($_POST['kleur']) && ($_POST['kleur'] == '6')) echo 'checked="checked" ';?>>wit
 <input name = "kleur" type = "radio" value = "7" <?php if(isset($_POST['kleur']) && ($_POST['kleur'] == '7')) echo 'checked="checked" ';?>>zwart<br>
-
-<button type = "prijs">price</button>
+<br>
+<button type="prijs" class="btn btn-primary btn-lg">Price</button>
 <!-- <button type = "bestellen">Order</button> -->
 </form>
-</div>
+
 
 <?php
 // prijs berekenen. 
@@ -50,7 +50,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
     $breedteTotaal = $_POST["breedte"] + 2*10;
     $hoogte = $_POST["hoogte"];
     $lengte = $_POST["lengte"];
-    
+    $verf = $_POST['verf'];
+    $bouwen = $_POST['bouwen'];
     $prijs = 0;
     $lengtePlaat = 244;
     $breedtePlaat = 122;
@@ -63,9 +64,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
     $kostenSchilderen = 10;
     $kostenSchilderenPoten = $kostenSchilderen + ($kostenSchilderen * 0.1);
     $winstMarge = 50;
-    $verf = $_POST['verf'];
-    $bouwen = $_POST['bouwen'];
     $btw = 21;
+
+    
+
+
 
     if ($lengteTotaal<=$lengtePlaat && $breedteTotaal<=$breedtePlaat){
         $prijs = $prijs + $kostenPlaat;
@@ -102,10 +105,10 @@ $prijs = $prijs + ($prijs * $winstMarge/100);
 $prijs = ($prijs + $prijs * $btw/100);
     }
 
-echo "<div class ='eindprijs'> &euro; ". (round($prijs,2,PHP_ROUND_HALF_UP)) ." inclusief B.T.W.</div>";
+echo "<div class ='eindprijs'>&euro; ".(round($prijs,2,PHP_ROUND_HALF_UP))." <p> inclusief B.T.W.</p></div>";
 
 ?>
-
+</div>
 
 
     <script src="formulier.js"></script>
